@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glamour Haven Salon</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Tailwind Colors - NEW LIGHT PALETTE */
+        :root {
+            --color-soft-white: #F8F8F8; /* Main background / Lightest */
+            --color-steel-blue: #B0C4DE; /* Light Steel Blue - accent */
+            --color-dark-gray: #4A4A4A; /* Classic Dark Gray - primary text/darker elements */
+        }
+
+        /* Updated Tailwind classes to reflect new color names */
+        .bg-soft-white { background-color: var(--color-soft-white); }
+        .text-soft-white { color: var(--color-soft-white); }
+        .bg-steel-blue { background-color: var(--color-steel-blue); }
+        .text-steel-blue { color: var(--color-steel-blue); }
+        .bg-dark-gray { background-color: var(--color-dark-gray); }
+        .text-dark-gray { color: var(--color-dark-gray); }
+        .border-steel-blue { border-color: var(--color-steel-blue); }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden; /* Prevent horizontal scroll due to animations */
+        }
+
+        /* Animation Classes for Sections */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .scale-in.appear {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Hero section specific styling for background image */
+        .hero-section {
+            /* Updated placeholder image to reflect new color scheme */
+            background-image: url("Photo/hero\ .jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Transparent blur effect for cards */
+        .backdrop-blur-card {
+            background-color: rgba(248, 248, 248, 0.4); /* Soft White with 40% opacity */
+            backdrop-filter: blur(10px); /* Blur effect */
+            -webkit-backdrop-filter: blur(10px); /* For Safari support */
+            border: 1px solid rgba(176, 196, 222, 0.5); /* Steel Blue with 50% opacity border */
+        }
+
+        /* Circular Text Logo Styling */
+        #circular-text-logo {
+            animation: spin-logo linear infinite; /* Apply initial spin */
+            animation-duration: 20s; /* Default speed */
+            transition: animation-duration 0.3s ease-in-out; /* Smooth transition for speed change */
+        }
+
+        #circular-text-logo.speed-up {
+            animation-duration: 10s; /* Faster spin on hover */
+        }
+
+        @keyframes spin-logo {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .char-span {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1rem; /* Adjust font size as needed */
+            font-weight: 700; /* Bold */
+            white-space: nowrap; /* Prevent text wrapping */
+            color: var(--color-dark-gray); /* Text color for letters */
+        }
+    </style>
+</head>
+<body class="bg-soft-white text-dark-gray">
+
+    <!-- Header -->
+    <header class="fixed w-full z-50 bg-soft-white bg-opacity-90 shadow-lg p-4">
+        <nav class="container mx-auto flex justify-between items-center">
+            <!-- Circular Text Logo -->
+            <a href="#home" class="flex items-center justify-center p-2 rounded-md" id="logo-link">
+                <div id="circular-text-logo" class="w-24 h-24 relative flex items-center justify-center rounded-full">
+                    <!-- Letters will be injected here by JS -->
+                </div>
+            </a>
+            <ul class="flex space-x-6">
+                <li><a href="#home" class="text-dark-gray hover:text-steel-blue transition-colors duration-300 font-medium rounded-md p-2">Home</a></li>
+                <li><a href="#services" class="text-dark-gray hover:text-steel-blue transition-colors duration-300 font-medium rounded-md p-2">Services</a></li>
+                <li><a href="#gallery" class="text-dark-gray hover:text-steel-blue transition-colors duration-300 font-medium rounded-md p-2">Gallery</a></li>
+                <li><a href="#about" class="text-dark-gray hover:text-steel-blue transition-colors duration-300 font-medium rounded-md p-2">About Us</a></li>
+                <li><a href="#contact" class="text-dark-gray hover:text-steel-blue transition-colors duration-300 font-medium rounded-md p-2">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section relative h-screen flex items-center justify-center text-center">
+        <div class="absolute inset-0 bg-dark-gray opacity-70"></div>
+        <div class="relative z-10 p-6 max-w-4xl mx-auto">
+            <h1 class="text-5xl md:text-7xl font-extrabold text-soft-white mb-6 leading-tight fade-in">
+                Unleash Your Inner Radiance
+            </h1>
+            <p class="text-lg md:text-xl text-soft-white mb-8 fade-in" style="transition-delay: 0.2s;">
+                Experience unparalleled beauty services tailored just for you.
+            </p>
+            <a href="#services" class="inline-block bg-steel-blue text-dark-gray font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-soft-white transition-all duration-300 transform hover:scale-105 fade-in" style="transition-delay: 0.4s;">
+                Explore Our Services
+            </a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-dark-gray text-soft-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 fade-in">Our Services</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Service Card 1 -->
+                <div class="bg-soft-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 scale-in">
+                    <h3 class="text-2xl font-semibold text-steel-blue mb-4">Hair Styling & Cuts</h3>
+                    <p class="text-gray-700 mb-4">From classic cuts to modern trends, our expert stylists will craft the perfect look for you.</p>
+                    <ul class="list-disc list-inside text-gray-600">
+                        <li>Haircuts (Men & Women)</li>
+                        <li>Coloring & Highlights</li>
+                        <li>Perms & Treatments</li>
+                        <li>Bridal Hair</li>
+                    </ul>
+                </div>
+                <!-- Service Card 2 -->
+                <div class="bg-soft-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 scale-in" style="transition-delay: 0.1s;">
+                    <h3 class="text-2xl font-semibold text-steel-blue mb-4">Manicure & Pedicure</h3>
+                    <p class="text-gray-700 mb-4">Indulge in a relaxing hand and foot treatment, leaving you feeling refreshed.</p>
+                    <ul class="list-disc list-inside text-gray-600">
+                        <li>Classic Manicure</li>
+                        <li>Spa Pedicure</li>
+                        <li>Gel Nails</li>
+                        <li>Nail Art</li>
+                    </ul>
+                </div>
+                <!-- Service Card 3 -->
+                <div class="bg-soft-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 scale-in" style="transition-delay: 0.2s;">
+                    <h3 class="text-2xl font-semibold text-steel-blue mb-4">Facials & Skincare</h3>
+                    <p class="text-gray-700 mb-4">Rejuvenate your skin with our range of personalized facial treatments.</p>
+                    <ul class="list-disc list-inside text-gray-600">
+                        <li>Deep Cleansing Facial</li>
+                        <li>Anti-Aging Facial</li>
+                        <li>Acne Treatment</li>
+                        <li>Hydrating Mask</li>
+                    </ul>
+                </div>
+                <!-- Service Card 4 -->
+                <div class="bg-soft-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 scale-in" style="transition-delay: 0.3s;">
+                    <h3 class="text-2xl font-semibold text-steel-blue mb-4">Makeup Artistry</h3>
+                    <p class="text-gray-700 mb-4">Look your best for any occasion with our professional makeup artists.</p>
+                    <ul class="list-disc list-inside text-gray-600">
+                        <li>Day & Evening Makeup</li>
+                        <li>Bridal Makeup</li>
+                        <li>Special Occasion</li>
+                        <li>Makeup Lessons</li>
+                    </ul>
+                </div>
+                <!-- Service Card 5 -->
+                <div class="bg-soft-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 scale-in" style="transition-delay: 0.4s;">
+                    <h3 class="text-2xl font-semibold text-steel-blue mb-4">Waxing & Hair Removal</h3>
+                    <p class="text-gray-700 mb-4">Smooth and long-lasting hair removal services for all skin types.</p>
+                    <ul class="list-disc list-inside text-gray-600">
+                        <li>Full Body Waxing</li>
+                        <li>Eyebrow Shaping</li>
+                        <li>Lip & Chin Wax</li>
+                        <li>Leg & Arm Wax</li>
+                    </ul>
+                </div>
+                <!-- Service Card 6 -->
+                <div class="bg-soft-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 scale-in" style="transition-delay: 0.5s;">
+                    <h3 class="text-2xl font-semibold text-steel-blue mb-4">Spa & Massage</h3>
+                    <p class="text-gray-700 mb-4">Relax and unwind with our soothing spa treatments and massages.</p>
+                    <ul class="list-disc list-inside text-gray-600">
+                        <li>Swedish Massage</li>
+                        <li>Deep Tissue Massage</li>
+                        <li>Aromatherapy</li>
+                        <li>Hot Stone Therapy</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20 bg-soft-white text-dark-gray">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 text-dark-gray fade-in">Our Portfolio</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Gallery Item 1 -->
+                <div class="relative group rounded-xl overflow-hidden shadow-lg scale-in">
+                    <!-- Updated placeholder image to reflect new color scheme -->
+                    <img src="Photo/beautiful-woman-with-perfect-brown-shiny-hair.jpg" alt="Hair Style 1" class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-dark-gray bg-opacity-70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p class="text-soft-white text-lg font-semibold">Elegant Updo</p>
+                    </div>
+                </div>
+                <!-- Gallery Item 2 -->
+                <div class="relative group rounded-xl overflow-hidden shadow-lg scale-in" style="transition-delay: 0.1s;">
+                    <!-- Updated placeholder image to reflect new color scheme -->
+                    <img src="Photo/women-wearing-colorful-manicure.jpg" alt="Nails Design 1" class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-dark-gray bg-opacity-70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p class="text-soft-white text-lg font-semibold">French Manicure</p>
+                    </div>
+                </div>
+                <!-- Gallery Item 3 -->
+                <div class="relative group rounded-xl overflow-hidden shadow-lg scale-in" style="transition-delay: 0.2s;">
+                    <!-- Updated placeholder image to reflect new color scheme -->
+                    <img src="Photo/beautician-with-brush-applies-white-moisturizing-mask-face-young-girl-client-spa-beauty-salon.jpg" alt="Facial Treatment 1" class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-dark-gray bg-opacity-70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p class="text-soft-white text-lg font-semibold">Relaxing Facial</p>
+                    </div>
+                </div>
+                <!-- Gallery Item 4 -->
+                <div class="relative group rounded-xl overflow-hidden shadow-lg scale-in" style="transition-delay: 0.3s;">
+                    <!-- Updated placeholder image to reflect new color scheme -->
+                    <img src="Photo/beautiful-girl-stands-near-walll-with-leaves.jpg" alt="Makeup Look 1" class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-dark-gray bg-opacity-70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p class="text-soft-white text-lg font-semibold">Glamorous Makeup</p>
+                    </div>
+                </div>
+                <!-- Gallery Item 5 -->
+                <div class="relative group rounded-xl overflow-hidden shadow-lg scale-in" style="transition-delay: 0.4s;">
+                    <!-- Updated placeholder image to reflect new color scheme -->
+                    <img src="Photo/stunning-woman-with-long-red-hair.jpg" alt="Hair Color 2" class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-dark-gray bg-opacity-70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p class="text-soft-white text-lg font-semibold">Vibrant Color</p>
+                    </div>
+                </div>
+                <!-- Gallery Item 6 -->
+                <div class="relative group rounded-xl overflow-hidden shadow-lg scale-in" style="transition-delay: 0.5s;">
+                    <!-- Updated placeholder image to reflect new color scheme -->
+                    <img src="Photo/spa-treatment-product-female-feet-hand-spa.jpg" alt="Pedicure 2" class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-dark-gray bg-opacity-70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p class="text-soft-white text-lg font-semibold">Spa Pedicure</p>
+                    </div>
+                </div>
+                <!-- Gallery Item 7 -->
+                <div class="relative group rounded-xl overflow-hidden shadow-lg scale-in" style="transition-delay: 0.6s;">
+                    <!-- Updated placeholder image to reflect new color scheme -->
+                    <img src="Photo/closeup-woman-eye-with-falling-lashes-cheek.jpg" alt="Eyebrow Shape 3" class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-dark-gray bg-opacity-70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p class="text-soft-white text-lg font-semibold">Perfect Brows</p>
+                    </div>
+                </div>
+                <!-- Gallery Item 8 -->
+                <div class="relative group rounded-xl overflow-hidden shadow-lg scale-in" style="transition-delay: 0.7s;">
+                    <!-- Updated placeholder image to reflect new color scheme -->
+                    <img src="Photo/bride-getting-ready.jpg" alt="Bridal Hair 4" class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-dark-gray bg-opacity-70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p class="text-soft-white text-lg font-semibold">Bridal Elegance</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="py-20 bg-dark-gray text-soft-white">
+        <div class="container mx-auto px-6 flex flex-col lg:flex-row items-center gap-10">
+            <div class="lg:w-1/2 fade-in">
+                <!-- Updated placeholder image to reflect new color scheme -->
+                <img src="Photo/30221.jpg" alt="About Us" class="rounded-xl shadow-lg w-full h-auto object-cover">
+            </div>
+            <div class="lg:w-1/2 text-center lg:text-left fade-in" style="transition-delay: 0.2s;">
+                <h2 class="text-4xl font-bold mb-6 text-soft-white">About Glamour Haven</h2>
+                <p class="text-lg text-gray-300 mb-4">
+                    At Glamour Haven, we believe in enhancing your natural beauty and providing a sanctuary for relaxation and rejuvenation. Our team of highly skilled and passionate professionals is dedicated to delivering exceptional services in a luxurious and welcoming environment.
+                </p>
+                <p class="text-lg text-gray-300 mb-4">
+                    Founded in 20XX, Glamour Haven has quickly become a premier destination for beauty and wellness. We use only the finest products and the latest techniques to ensure you leave feeling confident, refreshed, and truly glamorous.
+                </p>
+                <a href="#contact" class="inline-block bg-steel-blue text-dark-gray font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-soft-white hover:text-dark-gray transition-all duration-300 transform hover:scale-105">
+                    Book an Appointment
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-soft-white text-dark-gray">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 text-dark-gray fade-in">Contact Us</h2>
+            <div class="flex flex-col lg:flex-row gap-10 items-center justify-center">
+                <!-- Contact Form Card -->
+                <div class="lg:w-1/2 p-8 rounded-xl shadow-lg fade-in backdrop-blur-card">
+                    <h3 class="text-2xl font-semibold mb-6 text-steel-blue">Get in Touch</h3>
+                    <form class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-lg font-medium mb-2">Name</label>
+                            <input type="text" id="name" name="name" class="w-full p-3 rounded-md border border-steel-blue focus:outline-none focus:ring-2 focus:ring-steel-blue bg-soft-white bg-opacity-20 text-dark-gray placeholder-dark-gray" placeholder="Your Name">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-lg font-medium mb-2">Email</label>
+                            <input type="email" id="email" name="email" class="w-full p-3 rounded-md border border-steel-blue focus:outline-none focus:ring-2 focus:ring-steel-blue bg-soft-white bg-opacity-20 text-dark-gray placeholder-dark-gray" placeholder="Your Email">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-lg font-medium mb-2">Message</label>
+                            <textarea id="message" name="message" rows="5" class="w-full p-3 rounded-md border border-steel-blue focus:outline-none focus:ring-2 focus:ring-steel-blue bg-soft-white bg-opacity-20 text-dark-gray placeholder-dark-gray" placeholder="Your Message"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-dark-gray text-soft-white font-semibold py-3 rounded-full shadow-lg hover:bg-steel-blue hover:text-dark-gray transition-all duration-300 transform hover:scale-105">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+                <!-- Location & Hours Card - Now takes full width if no map -->
+                <div class="lg:w-1/2 p-8 rounded-xl shadow-lg fade-in backdrop-blur-card" style="transition-delay: 0.2s;">
+                    <h3 class="text-2xl font-semibold mb-6 text-steel-blue">Our Location & Hours</h3>
+                    <p class="mb-4 text-lg">
+                        <strong>Address:</strong> 123 Beauty Blvd, Glamour City, GC 12345
+                    </p>
+                    <p class="mb-4 text-lg">
+                        <strong>Phone:</strong> (123) 456-7890
+                    </p>
+                    <p class="mb-4 text-lg">
+                        <strong>Email:</strong> info@glamourhaven.com
+                    </p>
+                    <p class="mb-4 text-lg">
+                        <strong>Hours:</strong><br>
+                        Mon - Fri: 9:00 AM - 7:00 PM<br>
+                        Sat: 10:00 AM - 6:00 PM<br>
+                        Sun: Closed
+                    </p>
+                    <!-- Since the map is removed, this space can be used for more contact info or removed entirely -->
+                    <div class="w-full h-32 flex items-center justify-center text-dark-gray">
+                        <p class="text-center text-lg">Visit us soon!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark-gray py-8 text-center text-soft-white border-t border-steel-blue">
+        <p>&copy; 2023 Glamour Haven Salon. All rights reserved.</p>
+        <div class="flex justify-center space-x-4 mt-4">
+            <a href="#" class="text-soft-white hover:text-steel-blue transition-colors duration-300">Facebook</a>
+            <a href="#" class="text-soft-white hover:text-steel-blue transition-colors duration-300">Instagram</a>
+            <a href="#" class="text-soft-white hover:text-steel-blue transition-colors duration-300">Twitter</a>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for scroll-based animations and circular logo
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Section Animations (Fade-in/Scale-in) ---
+            const faders = document.querySelectorAll('.fade-in');
+            const scalers = document.querySelectorAll('.scale-in');
+
+            const appearOptions = {
+                threshold: 0.2, // When 20% of the element is in view
+                rootMargin: "0px 0px -50px 0px" // Adjusts when the intersection occurs
+            };
+
+            const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) {
+                        return;
+                    } else {
+                        entry.target.classList.add('appear');
+                        // console.log(`Element ${entry.target.id || entry.target.tagName || entry.target.className} appeared!`); // Debugging log
+                        appearOnScroll.unobserve(entry.target); // Stop observing once it appears
+                    }
+                });
+            }, appearOptions);
+
+            faders.forEach(fader => {
+                appearOnScroll.observe(fader);
+            });
+
+            scalers.forEach(scaler => {
+                appearOnScroll.observe(scaler);
+            });
+
+            // --- Smooth scrolling for navigation links ---
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // --- Circular Text Logo Logic ---
+            const circularTextElement = document.getElementById('circular-text-logo');
+            const text = "GLAMOUR HAVEN"; // The text for your logo
+            const radius = 40; // Radius for the circle of text in pixels (half of 96px width/height, adjusted slightly)
+            const characters = text.split('');
+            const numCharacters = characters.length;
+            const angleStep = (2 * Math.PI) / numCharacters; // Angle in radians for each character
+
+            // Clear any existing content in the logo div
+            circularTextElement.innerHTML = '';
+
+            // Create and position each character
+            characters.forEach((char, index) => {
+                const span = document.createElement('span');
+                span.textContent = char;
+                span.classList.add('char-span');
+
+                // Calculate X and Y coordinates on the circle
+                // Subtract Math.PI / 2 to start the text from the top of the circle
+                const x = radius * Math.cos(index * angleStep - Math.PI / 2);
+                const y = radius * Math.sin(index * angleStep - Math.PI / 2);
+
+                // Calculate rotation to make the character face outwards from the center of the circle
+                const rotationAngle = (index * angleStep * (180 / Math.PI)) + 90; // Convert to degrees and adjust by 90 for outward facing
+
+                span.style.position = 'absolute';
+                // Position the center of the span at the calculated (x, y) relative to the parent's center
+                span.style.left = `calc(50% + ${x}px)`;
+                span.style.top = `calc(50% + ${y}px)`;
+                // Translate(-50%, -50%) centers the span element on its calculated left/top.
+                // Then rotate it to face outwards.
+                span.style.transform = `translate(-50%, -50%) rotate(${rotationAngle}deg)`;
+                span.style.color = 'var(--color-dark-gray)'; // Explicitly set color for the letters
+
+                circularTextElement.appendChild(span);
+            });
+
+            // Add hover effect for the circular text logo
+            const logoLink = document.getElementById('logo-link'); // The anchor tag wrapping the logo
+            if (logoLink) {
+                logoLink.addEventListener('mouseover', () => {
+                    circularTextElement.classList.add('speed-up');
+                });
+                logoLink.addEventListener('mouseout', () => {
+                    circularTextElement.classList.remove('speed-up');
+                });
+            }
+
+            // Ensure the logo animation starts running
+            circularTextElement.style.animationPlayState = 'running';
+        });
+    </script>
+</body>
+</html>
